@@ -1,0 +1,40 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: booksystem
+      POSTGRES_USER: bookadmin
+      POSTGRES_PASSWORD: secure_password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  wildfly:
+    build: ./BookSystem/
+    ports:
+      - "8080:8080"
+      - "9990:9990" # Admin console (optional)
+    environment:
+      JAVA_OPTS: -Djboss.bind.address=0.0.0.0
+      POSTGRES_DB: booksystem
+      POSTGRES_USER: bookadmin
+      POSTGRES_PASSWORD: secure_password
+    depends_on:
+      - postgres
+    networks:
+      - app-network
+
+  front:
+    build: ./BookSystemFrontend/
+    ports:
+      - "3000:3000"
+    depends_on:
+      - wildfly
+
+volumes:
+  pgdata:
+
+networks:
+  app-network:
+    driver: bridge

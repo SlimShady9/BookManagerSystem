@@ -1,0 +1,21 @@
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             version="3.0">
+
+    <persistence-unit name="MyPU" transaction-type="JTA">
+        <class>com.leyona.domain.Book</class>
+
+        <properties>
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://postgres:5432/${POSTGRES_DB:booksystem}"/>
+            <property name="jakarta.persistence.jdbc.user" value="${POSTGRES_USER:bookadmin}"/>
+            <property name="jakarta.persistence.jdbc.password" value="${POSTGRES_PASSWORD:secure_password}"/>
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="jakarta.persistence.sql-load-script-source" value="/import.sql"/>
+
+        </properties>
+    </persistence-unit>
+</persistence>
