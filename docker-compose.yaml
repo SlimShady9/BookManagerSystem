@@ -14,7 +14,6 @@ services:
     build: ./BookSystem/
     ports:
       - "8080:8080"
-      - "9990:9990" # Admin console (optional)
     environment:
       JAVA_OPTS: -Djboss.bind.address=0.0.0.0
       POSTGRES_DB: booksystem

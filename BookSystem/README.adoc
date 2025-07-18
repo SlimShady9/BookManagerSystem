@@ -12,21 +12,15 @@ To run the application, you use Maven:
 
 [source,shell]
 ----
+mvn clean install
 mvn clean package
 ----
+
+These are added into the build.sh script so is also possible to use it as an alternative
 
 Maven will compile the application, provision a WildFly server
 The WildFly server is created in `target/server` with the application deployed in it.
 
-== Running the application
-
-To run the application, run the commands:
-
-[source,shell]
-----
-cd target/server
-./bin/standalone.sh
-----
 
 Once WildFly is running, the application can be accessed at http://localhost:8080/
 
